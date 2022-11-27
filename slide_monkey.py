@@ -21,13 +21,13 @@ def callback(recognizer, audio):
         # sentences to recognize:
         # - go to the next
         # - go to the previous
-        recognized = recognizer.recognize_google(audio)
-        print("recognized: {}".format(recognized))
+        recognized_text = recognizer.recognize_google(audio).lower()
+        print("recognized: {}".format(recognized_text))
 
-        if "to the next" in recognized.lower():
+        if "to the next" in recognized:
             print("go to next slide")
             hotkey("right")
-        elif "to the previous" in recognized.lower():
+        elif "to the previous" in recognized:
             print("go to previous slide")
             hotkey("left")
     except sr.UnknownValueError as e:
@@ -35,15 +35,15 @@ def callback(recognizer, audio):
     except sr.RequestError as e:
         print("request error: {}".format(e))
 
-r = sr.Recognizer()
-m = sr.Microphone(device_index=1)
-with m as source:
+recognizer = sr.Recognizer()
+mic = sr.Microphone(device_index=1)
+with mic as source:
 
     # calibrate once, before we start listening
-    r.adjust_for_ambient_noise(source)
+    recognizer.adjust_for_ambient_noise(source)
 
 # start listening in background 
-stop_listening = r.listen_in_background(m, callback)
+stop_listening = recognizer.listen_in_background(mic, callback)
 
 # idle
 print("listening, press 'q' to stop")

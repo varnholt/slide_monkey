@@ -24,10 +24,10 @@ def callback(recognizer, audio):
         recognized_text = recognizer.recognize_google(audio).lower()
         print("recognized: {}".format(recognized_text))
 
-        if "to the next" in recognized:
+        if "to the next" in recognized_text:
             print("go to next slide")
             hotkey("right")
-        elif "to the previous" in recognized:
+        elif "to the previous" in recognized_text:
             print("go to previous slide")
             hotkey("left")
     except sr.UnknownValueError as e:
@@ -58,5 +58,4 @@ while True:
 
 # stop listening
 stop_listening(wait_for_stop=False)
-
 

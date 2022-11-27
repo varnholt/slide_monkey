@@ -26,10 +26,10 @@ def callback(recognizer, audio):
 
         if "to the next" in recognized.lower():
             print("go to next slide")
-            hotkey('right')
+            hotkey("right")
         elif "to the previous" in recognized.lower():
             print("go to previous slide")
-            hotkey('left')
+            hotkey("left")
     except sr.UnknownValueError as e:
         print("unknown value error: {}".format(e))
     except sr.RequestError as e:
